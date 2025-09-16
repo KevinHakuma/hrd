@@ -2,17 +2,20 @@
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
   <title>HRD Links — Dev IRT</title>
   <meta name="description" content="Link-in-bio HRD: Loker 2025, IGT 2025, Walk-In Interview, Exit Interview, BPJS TK Mitra." />
   <meta name="theme-color" content="#1f3b2f" />
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================
+       THEME & TOKENS
+       ========================= */
     :root{
-      /* Palet: premium green + beige */
       --deep: #1f3b2f;      /* deep green */
       --sage: #587a68;      /* sage */
       --beige: #efe9e2;     /* soft beige bg */
@@ -21,8 +24,39 @@
       --muted:#6d6b66;      /* muted text */
       --ring: rgba(40,80,64,.22);
       --shadow: 0 18px 40px rgba(24, 36, 30, .18);
-      --radius: 20px;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+
+      /* fluid type scale */
+      --fs-title: clamp(1.05rem, 0.7rem + 1.2vw, 1.35rem);
+      --fs-sub: clamp(.8rem, .7rem + .3vw, .9rem);
+      --fs-item: clamp(.92rem, .8rem + .4vw, 1.02rem);
+      --fs-meta: clamp(.75rem, .7rem + .2vw, .85rem);
+
+      /* layout */
+      --wrap-w: min(100%, 520px);
+      --gutter: clamp(16px, 4vw, 26px);
+      --pad-s: clamp(12px, 3.2vw, 18px);
+      --pad-m: clamp(16px, 3.8vw, 22px);
+      --tap: 48px;
     }
+
+    /* Dark mode (ringan) */
+    @media (prefers-color-scheme: dark) {
+      :root{
+        --beige: #121712;
+        --card: #18241d;
+        --ink: #f5f6f4;
+        --muted: #c8cdc7;
+        --ring: rgba(200,230,210,.22);
+        --shadow: 0 18px 40px rgba(0,0,0,.4);
+      }
+    }
+
+    /* =========================
+       BASE
+       ========================= */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -32,20 +66,26 @@
         radial-gradient(1000px 700px at 10% 10%, rgba(31,59,47,.18), transparent 60%),
         radial-gradient(900px 600px at 90% 120%, rgba(88,122,104,.18), transparent 60%),
         var(--beige);
-      display:grid; place-items:center; padding:24px;
+      display:grid; place-items:center;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+               max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      -webkit-tap-highlight-color: transparent;
     }
 
     .wrap{
-      width:100%; max-width:520px;
+      width:var(--wrap-w);
       background: linear-gradient(180deg, rgba(31,59,47,.04), rgba(255,255,255,.55)), var(--card);
-      border:1px solid rgba(31,59,47,.10);
-      border-radius:28px;
+      border:1px solid color-mix(in oklab, var(--deep) 15%, transparent);
+      border-radius:var(--radius-xl);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
 
+    /* =========================
+       HEADER
+       ========================= */
     .head{
-      padding:28px 26px 10px;
+      padding: clamp(18px, 3.5vw, 28px) var(--gutter) clamp(8px, 2vw, 10px);
       display:flex; align-items:center; gap:14px;
     }
     .logo{
@@ -60,151 +100,210 @@
       box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
       flex:0 0 auto;
     }
-    .title{ font-weight:700; letter-spacing:.2px }
-    .subtitle{ color:var(--muted); font-size:13px; margin-top:4px }
+    .title{ font-weight:700; letter-spacing:.2px; font-size:var(--fs-title) }
+    .subtitle{ color:var(--muted); font-size:var(--fs-sub); margin-top:4px }
 
+    /* =========================
+       SECTIONS
+       ========================= */
     .section{
-      padding: 8px 18px 22px;
+      padding: clamp(6px, 1.5vw, 10px) var(--gutter) clamp(16px, 3vw, 22px);
     }
     .label{
-      font-size:11.5px; text-transform:uppercase; letter-spacing:.22px;
-      color:var(--sage); margin:10px 8px;
+      font-size: calc(var(--fs-meta) * .95);
+      text-transform:uppercase; letter-spacing:.22px;
+      color:var(--sage); margin:10px 6px;
       display:flex; align-items:center; gap:8px;
     }
     .label::before{
       content:""; width:8px; height:8px; border-radius:999px; background:var(--sage); opacity:.7;
     }
 
-    .stack{ display:grid; gap:12px; padding:0 8px }
+    /* Stack list (mobile) */
+    .stack{ display:grid; gap:12px; padding:0 6px }
+
     .item{
       display:flex; align-items:center; gap:14px;
-      padding:14px 16px; border-radius:16px;
-      background:#ffffffcc;
+      min-height: var(--tap);
+      padding: 12px clamp(12px, 2.5vw, 16px);
+      border-radius:var(--radius-md);
+      background: color-mix(in oklab, #fff 85%, transparent);
       backdrop-filter:saturate(1.1) blur(2px);
-      border:1px solid rgba(31,59,47,.10);
+      border:1px solid color-mix(in oklab, var(--deep) 12%, transparent);
       text-decoration:none; color:var(--ink);
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
       position:relative;
+      touch-action: manipulation;
     }
-    .item:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(31,59,47,.12); border-color: rgba(31,59,47,.18) }
+    .item:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(31,59,47,.12); border-color: color-mix(in oklab, var(--deep) 18%, transparent) }
+    .item:active{ transform: translateY(0) scale(.99) }
     .item:focus-visible{ outline:none; box-shadow:0 0 0 4px var(--ring) }
 
     .badge{
       flex:0 0 auto;
-      width:36px; height:36px; border-radius:10px;
+      inline-size: clamp(36px, 6.2vw, 40px);
+      block-size: clamp(36px, 6.2vw, 40px);
+      border-radius:10px;
       display:grid; place-items:center;
       background: linear-gradient(180deg, #f1eee7, #fff);
-      border:1px solid rgba(31,59,47,.12);
-      font-size:18px;
+      border:1px solid color-mix(in oklab, var(--deep) 12%, transparent);
+      font-size: clamp(18px, 3.5vw, 20px);
     }
-    .text{
-      display:grid; gap:3px; line-height:1.2;
+    .text{ display:grid; gap:4px; line-height:1.2; min-width:0 }
+    .text b{
+      font-weight:700; font-size: var(--fs-item);
+      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
     }
-    .text b{ font-weight:700 }
-    .text span{ font-size:12.5px; color:var(--muted) }
+    .text span{
+      font-size: var(--fs-meta); color:var(--muted);
+      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
     .chev{
       margin-left:auto; opacity:.55; transform:translateX(0);
+      width:22px; height:22px; flex:0 0 auto;
       transition: transform .12s ease, opacity .12s ease;
     }
     .item:hover .chev{ transform:translateX(2px); opacity:.8 }
 
+    /* Social */
     .social{
       display:flex; justify-content:center; gap:14px;
-      padding: 4px 0 20px;
+      padding: 6px 0 clamp(12px, 2.6vw, 20px);
+      flex-wrap: wrap;
     }
     .icon{
-      width:42px; height:42px; border-radius:12px;
+      width: max(var(--tap), 42px); height: max(var(--tap), 42px);
+      border-radius:12px;
       display:grid; place-items:center;
-      background:#ffffffd9; border:1px solid rgba(31,59,47,.10);
+      background: color-mix(in oklab, #fff 92%, transparent);
+      border:1px solid color-mix(in oklab, var(--deep) 10%, transparent);
       transition: transform .12s ease, background .12s ease;
+      touch-action: manipulation;
     }
     .icon:hover{ transform:translateY(-1px); background:#fff }
     .icon svg{ width:20px; height:20px; fill:var(--deep) }
 
     .foot{
-      text-align:center; color:var(--muted); font-size:12px; padding:0 0 18px;
+      text-align:center; color:var(--muted);
+      font-size:var(--fs-meta); padding:0 0 clamp(12px, 2.5vw, 18px);
+    }
+
+    /* =========================
+       RESPONSIVE LAYOUT
+       ========================= */
+
+    /* XS fix (≤340px): kompak */
+    @media (max-width: 340px){
+      .logo{ width:56px; height:56px; border-radius:14px; font-size:24px }
+      .head{ gap:10px }
+      .item{ gap:12px; padding:10px 12px }
+      .badge{ border-radius:9px }
+    }
+
+    /* ≥640px: dua kolom untuk daftar link (lebih efisien di desktop kecil) */
+    @media (min-width: 640px){
+      .stack{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+    }
+
+    /* ≥920px: wrapper lebih lebar & layout 2 kolom per section selaras */
+    @media (min-width: 920px){
+      :root{ --wrap-w: min(100%, 860px) }
+      .section > .stack{
+        grid-template-columns: repeat(3, 1fr);
+      }
+      /* contoh: kandidat 3 kolom, karyawan 2 kolom akan auto wrap */
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .item, .icon, .chev { transition: none }
     }
   </style>
 </head>
 <body>
   <main class="wrap" role="main" aria-label="HRD Link in Bio">
     <header class="head">
-      <div class="logo">HR</div>
+      <div class="logo" aria-hidden="true">HR</div>
       <div>
         <div class="title">HRD — Dev IRT</div>
         <div class="subtitle">Semua form HRD dalam satu halaman</div>
       </div>
     </header>
 
+    <!-- ====== SECTION: KANDIDAT ====== -->
     <section class="section">
       <div class="label">Untuk Kandidat</div>
       <div class="stack" aria-label="Tautan kandidat">
-        <!-- ========== GANTI URL DI SINI ========== -->
+        <!-- GANTI URL -->
         <a class="item" href="https://example.com/form-loker-2025" target="_blank" rel="noopener">
-          <div class="badge">💼</div>
+          <div class="badge" aria-hidden="true">💼</div>
           <div class="text">
             <b>LINK LOKER 2025</b>
             <span>Lowongan aktif & ketentuan melamar</span>
           </div>
-          <svg class="chev" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
 
         <a class="item" href="https://example.com/form-igt-2025" target="_blank" rel="noopener">
-          <div class="badge">🎓</div>
+          <div class="badge" aria-hidden="true">🎓</div>
           <div class="text">
             <b>PENDAFTARAN IGT 2025</b>
             <span>Program trainee / internship</span>
           </div>
-          <svg class="chev" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
 
         <a class="item" href="https://example.com/form-walk-in-interview" target="_blank" rel="noopener">
-          <div class="badge">📝</div>
+          <div class="badge" aria-hidden="true">📝</div>
           <div class="text">
             <b>FORM WALK IN INTERVIEW</b>
             <span>Daftar on-site dengan jadwal terdekat</span>
           </div>
-          <svg class="chev" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <!-- ======================================= -->
       </div>
     </section>
 
+    <!-- ====== SECTION: KARYAWAN ====== -->
     <section class="section">
       <div class="label">Untuk Karyawan</div>
       <div class="stack" aria-label="Tautan karyawan">
-        <!-- ========== GANTI URL DI SINI ========== -->
+        <!-- GANTI URL -->
         <a class="item" href="https://example.com/form-exit-interview" target="_blank" rel="noopener">
-          <div class="badge">🚪</div>
+          <div class="badge" aria-hidden="true">🚪</div>
           <div class="text">
             <b>FORM EXIT INTERVIEW</b>
             <span>Umpan balik saat pengunduran diri</span>
           </div>
-          <svg class="chev" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
 
         <a class="item" href="https://example.com/form-bpjs-tk-mitra" target="_blank" rel="noopener">
-          <div class="badge">🛡️</div>
+          <div class="badge" aria-hidden="true">🛡️</div>
           <div class="text">
             <b>FORM BPJS TK MITRA</b>
             <span>Registrasi/aktivasi BPJS Ketenagakerjaan</span>
           </div>
-          <svg class="chev" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <!-- ======================================= -->
       </div>
     </section>
 
+    <!-- ====== SOCIAL ====== -->
     <section class="section" aria-label="Sosial & Kontak">
       <div class="social">
         <a class="icon" href="https://instagram.com/your_hr_account" target="_blank" rel="noopener" aria-label="Instagram">
@@ -222,9 +321,10 @@
   </main>
 
   <script>
+    // Tahun otomatis
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Opsional: auto-append ?src=ig ke semua tautan jika dibuka dari IG
+    // Opsional: auto-append ?src=ig ke semua tautan jika datang dari IG
     const params = new URLSearchParams(location.search);
     if(params.get('src')){
       document.querySelectorAll('a.item').forEach(a=>{
