@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Form Loker 2025 — HRD Dev IRT</title>
+  <meta name="theme-color" content="#1f3b2f" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --deep:#1f3b2f; --sage:#587a68; --beige:#efe9e2; --card:#fffaf3;
+      --ink:#2a2a2a; --muted:#6d6b66; --ring:rgba(40,80,64,.22);
+      --shadow:0 18px 40px rgba(24,36,30,.18);
+      --radius:16px; --radius-lg:22px;
+    }
+    *{box-sizing:border-box}
+    /* html,body{height:100%} */
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1000px 700px at 10% 10%, rgba(31,59,47,.18), transparent 60%),
+        radial-gradient(900px 600px at 90% 120%, rgba(88,122,104,.18), transparent 60%),
+        var(--beige);
+      display:grid; place-items:start center;
+      padding:24px;
+    }
+    .wrap{
+      width:min(960px, 100%);
+      background: linear-gradient(180deg, rgba(31,59,47,.04), rgba(255,255,255,.55)), var(--card);
+      border:1px solid rgba(31,59,47,.10); border-radius:28px; box-shadow:var(--shadow);
+      padding: clamp(18px, 3vw, 28px);
+    }
+    header{
+      display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center;
+      min-block-size: clamp(92px, 10vw, 120px); padding-bottom:6px;
+    }
+    .logo{
+      width:64px; height:64px; border-radius:16px; display:grid; place-items:center;
+      background: radial-gradient(60% 60% at 50% 35%, #2a4a3b 0%, #1b3228 100%);
+      color:#ffb463; font-family:"Cormorant Garamond", serif; font-weight:600; font-size:28px;
+      border:1px solid rgba(255,255,255,.25); box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);
+    }
+    h1{margin:0; font-size:clamp(1.05rem, .8rem + .8vw, 1.5rem)}
+    .sub{color:var(--muted); font-size:clamp(.85rem, .8rem + .2vw, .95rem); margin-top:4px}
+
+    form{margin-top:12px}
+    fieldset{
+      border:1px solid rgba(31,59,47,.12);
+      border-radius:var(--radius-lg);
+      background:#fffdf8cc; padding: clamp(14px, 2.2vw, 20px);
+      margin: 16px 0;
+    }
+    legend{
+      padding:0 8px; color:var(--sage); text-transform:uppercase;
+      font-size:.8rem; letter-spacing:.2px;
+    }
+    .grid{display:grid; gap:14px}
+    @media (min-width:720px){ .grid.cols-2{ grid-template-columns:1fr 1fr } }
+    @media (min-width:980px){ .grid.cols-3{ grid-template-columns:repeat(3,1fr) } }
+
+    label{display:block; font-weight:600; margin-bottom:6px}
+    .req::after{content:" *"; color:#c2463a}
+    input[type="text"],input[type="email"],input[type="date"],input[type="number"], input[type="tel"], input[type="file"],select,textarea{
+      width:100%; border:1px solid rgba(31,59,47,.18); border-radius:12px;
+      padding:12px 12px; background:#fff; color:var(--ink); font:inherit;
+      transition: box-shadow .12s ease, border-color .12s ease;
+    }
+    textarea{min-height:110px; resize:vertical}
+    input:focus, select:focus, textarea:focus{ outline:none; box-shadow:0 0 0 4px var(--ring); border-color:rgba(31,59,47,.25) }
+
+    .hint{color:var(--muted); font-size:.85rem; margin-top:6px}
+    .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px;
+      border:1px solid rgba(31,59,47,.15); background:#fff}
+    .muted{color:var(--muted)}
+    .files input[type="file"]{padding:10px}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 18px; border-radius:999px; border:1px solid rgba(31,59,47,.18);
+      background:#e9efe8; color:#1f3b2f; font-weight:700; text-decoration:none;
+      transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 10px 18px rgba(31,59,47,.12); background:#f3f7f1 }
+    .btn:focus-visible{ outline:none; box-shadow:0 0 0 4px var(--ring) }
+
+    .actions{display:flex; gap:12px; flex-wrap:wrap}
+    .success{
+      display:none; margin-top:16px; border:1px solid rgba(31,59,47,.12);
+      background:#f2fbf4; color:#1c5a2e; padding:14px 16px; border-radius:14px;
+    }
+    .error{ color:#b42318; font-size:.9rem; margin-top:8px }
+    /* Chip 'Lainnya' dengan input kecil di dalamnya */
+    .chip-inline { gap: 8px; }
+    .chip-inline input[type="text"]{
+    border: 1px solid rgba(31,59,47,.18);
+    border-radius: 999px;
+    padding: 8px 10px;
+    min-width: 140px;
+    font: inherit;
+    }
+    .chip-inline input[type="text"]:focus{
+    outline: none;
+    box-shadow: 0 0 0 4px var(--ring);
+    border-color: rgba(31,59,47,.25);
+    }
+
+    .back-container {
+    width: 100%;
+    max-width: 520px;   /* sama kayak .wrap biar sejajar */
+    margin: 0 auto 12px;
+    }
+
+    .back-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: var(--deep);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background .2s ease, transform .15s ease;
+    }
+    .back-btn:hover {
+    background: #2c5644;
+    transform: translateY(-2px);
+    }
+    .back-btn:active {
+    transform: translateY(0);
+    }
+
+
+  </style>
+</head>
+<body>
+    <div class="back-container">
+        <a href="../index.html" class="back-btn">← Kembali</a>
+    </div>
+
+  <main class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true">HR</div>
+      <div>
+        <h1>Form Loker 2025</h1>
+        <div class="sub">Isi data dengan lengkap & benar. Tanda (*) wajib diisi.</div>
+      </div>
+    </header>
+
+    <form id="lokerForm" novalidate>
+      <!-- DATA DASAR -->
+      <fieldset>
+        <legend>Data Dasar</legend>
+        <div class="grid cols-2">
+          <div>
+            <label class="req" for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="nama@email.com" />
+          </div>
+
+          <div>
+            <label class="req" for="posisi">Posisi yang dilamar</label>
+            <select id="posisi" name="posisi" required>
+              <option value="">— pilih posisi —</option>
+              <!-- Ganti/isi sesuai kebutuhan -->
+              <option>Stylist</option>
+              <option>Therapist</option>
+              <option>Receptionist</option>
+              <option>Kasir</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="req" for="tb">Tinggi & Berat Badan</label>
+            <input id="tb" name="tinggi_berat" type="text" inputmode="numeric"
+                   placeholder="170/50" pattern="^[0-9]{2,3}\\/[0-9]{2,3}$" required />
+            <div class="hint">Format: <b>tinggi/berat</b> (cm/kg), contoh <b>170/50</b>.</div>
+          </div>
+
+          <div>
+            <label class="req">Mendapatkan informasi lowongan dari mana?</label>
+            <div class="row">
+            <label class="chip"><input type="checkbox" name="sumber[]" value="Instagram" /> Instagram</label>
+            <label class="chip"><input type="checkbox" name="sumber[]" value="TikTok" /> TikTok</label>
+            <label class="chip"><input type="checkbox" name="sumber[]" value="LinkedIn" /> LinkedIn</label>
+            <label class="chip"><input type="checkbox" name="sumber[]" value="Teman" /> Teman</label>
+            <label class="chip"><input type="checkbox" name="sumber[]" value="Walk-in" /> Walk-in</label>
+            <label class="chip"><input type="checkbox" name="sumber[]" value="Website" /> Website</label>
+
+            <!-- Lainnya dengan input -->
+            <label class="chip chip-inline">
+                <input id="sumber_lainnya_cb" type="checkbox" value="Lainnya" />
+                <span>Lainnya</span>
+                <input id="sumber_lainnya_text" type="text" placeholder="sebutkan…" 
+                    style="display:none" disabled autocomplete="off" />
+            </label>
+            </div>
+          </div>
+
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req" for="alasan">Mengapa tertarik untuk melamar?</label>
+            <textarea id="alasan" name="alasan" required placeholder="Tuliskan alasan Anda..."></textarea>
+          </div>
+
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req" for="tentang">Apa yang Anda ketahui tentang IrwanTeam?</label>
+            <textarea id="tentang" name="tentang" required placeholder="Tuliskan jawaban Anda..."></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- IDENTITAS -->
+      <fieldset>
+        <legend>Identitas</legend>
+        <div class="grid cols-2">
+          <div>
+            <label class="req" for="nama">Nama Lengkap</label>
+            <input id="nama" name="nama_lengkap" type="text" required />
+          </div>
+          <div>
+            <label class="req" for="panggilan">Nama Panggilan</label>
+            <input id="panggilan" name="nama_panggilan" type="text" required />
+          </div>
+
+          <div>
+            <label class="req" for="sosmed">Sosmed aktif (IG/TikTok)</label>
+            <input id="sosmed" name="sosmed" type="text" required placeholder="@username atau link profil" />
+            <div class="hint">Pastikan <b>tidak private</b>.</div>
+          </div>
+
+          <div>
+            <label class="req">Jenis Kelamin</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="jk" value="L" required /> Laki-laki</label>
+              <label class="chip"><input type="radio" name="jk" value="K" /> Perempuan</label>
+            </div>
+          </div>
+
+          <div>
+            <label class="req" for="tempat_lahir">Tempat Lahir</label>
+            <input id="tempat_lahir" name="tempat_lahir" type="text" required />
+          </div>
+          <div>
+            <label class="req" for="tgl_lahir">Bulan Tanggal Tahun Lahir</label>
+            <input id="tgl_lahir" name="tgl_lahir" type="date" required />
+          </div>
+
+          <div>
+            <label class="req" for="hp">Nomor Handphone Aktif</label>
+            <input id="hp" name="hp" type="number" required inputmode="numeric" placeholder="08123456789"
+                   pattern="^0[0-9]{9,14}$" />
+            <div class="hint">Awali 0, contoh <b>08123456789</b>.</div>
+          </div>
+          <div>
+            <label class="req" for="ktp">No. KTP</label>
+            <input id="ktp" name="ktp" type="number" inputmode="numeric" required pattern="^[0-9]{16}$" />
+            <div class="hint">16 digit.</div>
+          </div>
+
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req" for="alamat_ktp">Alamat KTP</label>
+            <textarea id="alamat_ktp" name="alamat_ktp" required></textarea>
+          </div>
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req" for="alamat_domisili">Alamat Domisili</label>
+            <textarea id="alamat_domisili" name="alamat_domisili" required></textarea>
+          </div>
+
+          <div>
+            <label class="req" for="agama">Agama</label>
+            <select id="agama" name="agama" required>
+              <option value="">— pilih —</option>
+              <option>Islam</option><option>Kristen</option><option>Katolik</option>
+              <option>Hindu</option><option>Buddha</option><option>Konghucu</option><option>Lainnya</option>
+            </select>
+          </div>
+          <div>
+            <label class="req" for="status">Status</label>
+            <select id="status" name="status" required>
+              <option value="">— pilih —</option>
+              <option>Belum Menikah</option>
+              <option>Menikah</option>
+              <option>Single Parent</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="req" for="anak_ya_tidak">Apakah punya anak? Jika ya, berapa?</label>
+            <input id="anak_ya_tidak" name="anak_info" type="text" required placeholder="Tidak / Ya, 1 anak" />
+          </div>
+          <div>
+            <label class="req" for="anak_ke">Anak ke berapa dari jumlah saudara</label>
+            <input id="anak_ke" name="anak_ke" type="text" required placeholder="2/5 (anak ke-2 dari 5 saudara)" />
+          </div>
+
+          <div>
+            <label class="req" for="pendidikan">Pendidikan formal terakhir</label>
+            <input id="pendidikan" name="pendidikan" type="text" required placeholder="SMA/SMK/D3/S1/..." />
+          </div>
+          <div>
+            <label class="req">Bersedia kerja shift, tanggal merah, dan hari raya?</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="shift" value="Ya" required /> Ya</label>
+              <label class="chip"><input type="radio" name="shift" value="Tidak" /> Tidak</label>
+            </div>
+          </div>
+
+          <div>
+            <label class="req">Bersedia ditempatkan di Jabodetabek?</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="penempatan" value="Ya" required /> Ya</label>
+              <label class="chip"><input type="radio" name="penempatan" value="Tidak" /> Tidak</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- PENGEMBANGAN DIRI -->
+      <fieldset>
+        <legend>Profil & Pengalaman</legend>
+        <div class="grid cols-2">
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req" for="kelebihan">5 Keunggulan/Kelebihan Anda</label>
+            <textarea id="kelebihan" name="kelebihan" required placeholder="Pisahkan dengan koma atau baris baru"></textarea>
+          </div>
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req" for="kelemahan">5 Kelemahan Anda</label>
+            <textarea id="kelemahan" name="kelemahan" required placeholder="Pisahkan dengan koma atau baris baru"></textarea>
+          </div>
+
+          <div class="cols-2" style="grid-column:1/-1">
+            <label for="riwayat">Riwayat kerja sebelumnya</label>
+            <textarea id="riwayat" name="riwayat" placeholder="Contoh: Salon Cantik — Stylist — 2012–2020; ..."></textarea>
+          </div>
+
+          <div>
+            <label for="gaji_terakhir">Pendapatan terakhir</label>
+            <input id="gaji_terakhir" name="gaji_terakhir" type="text" placeholder="misal: 1 jt - 2 jt" />
+          </div>
+          <div>
+            <label for="gaji_harapan">Pendapatan yang diharapkan</label>
+            <input id="gaji_harapan" name="gaji_harapan" type="text" placeholder="misal: 2 jt - 3 jt" />
+          </div>
+
+          <div>
+            <label class="req">Ada riwayat sakit keras 1–3 tahun terakhir?</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="riwayat_sakit" value="Tidak" required /> Tidak</label>
+              <label class="chip"><input type="radio" name="riwayat_sakit" value="Ya" /> Ya</label>
+            </div>
+            <textarea id="sakit_detail" name="sakit_detail" class="hint" placeholder="Jika Ya, sebutkan nama penyakitnya" style="margin-top:8px; display:none"></textarea>
+          </div>
+
+          <div class="cols-2" style="grid-column:1/-1">
+            <label>Apakah sedang menjalankan pendidikan?</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="kuliah" value="Tidak" /> Tidak</label>
+              <label class="chip"><input type="radio" name="kuliah" value="Ya" /> Ya</label>
+            </div>
+            <input type="text" id="kuliah_info" name="kuliah_info" placeholder='Jika "Ya": contoh "Kuliah di Univ. ... smt 3"' style="margin-top:8px; display:none">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- LAMPIRAN -->
+      <fieldset class="files">
+        <legend>Lampiran</legend>
+        <div class="grid cols-2">
+          <div>
+            <label for="cv" class="req">Lampirkan CV</label>
+            <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp" required />
+            <div class="hint">pdf/doc/gambar · maks 1 GB</div>
+          </div>
+
+          <div>
+            <label for="skck">Lampirkan SKCK (opsional)</label>
+            <input id="skck" name="skck" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp" />
+          </div>
+
+          <div>
+            <label for="ijazah">Lampirkan Ijazah Terakhir</label>
+            <input id="ijazah" name="ijazah" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp" />
+          </div>
+
+          <div>
+            <label for="ktp_file" class="req">Lampirkan KTP</label>
+            <input id="ktp_file" name="ktp_file" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp" required />
+          </div>
+
+          <div>
+            <label for="foto_full" class="req">Lampirkan foto seluruh badan</label>
+            <input id="foto_full" name="foto_full" type="file" accept=".png,.jpg,.jpeg,.webp,.pdf" required />
+            <div class="hint">Tanpa masker, berpakaian sopan · maks 1 GB</div>
+          </div>
+
+          <div class="cols-2" style="grid-column:1/-1">
+            <label for="portfolio">Lampirkan Portfolio (maks 10 file)</label>
+            <input id="portfolio" name="portfolio" type="file" multiple
+                   accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg,.webp,.mp3,.mp4" />
+            <div class="hint">Maks 10 file · maks 1 GB/file</div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button class="btn" type="submit">Kirim</button>
+        <span class="muted">Dengan menekan kirim, Anda menyetujui data digunakan untuk proses rekrutmen.</span>
+      </div>
+
+      <div id="success" class="success">
+        <strong>Terima kasih.</strong> Anda akan dihubungi apabila sesuai dengan kriteria dalam waktu 1–30 hari ke depan.
+      </div>
+      <div id="errors" class="error" role="alert" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <script>
+    // ====== CONFIG ======
+    const POST_URL = ""; // <-- isi dgn endpoint backend-mu. Contoh: "https://api.dev-irt.com/recruit/apply"
+    const MAX_FILE_BYTES = 1024 * 1024 * 1024; // 1 GB
+    const MAX_PORTFOLIO_FILES = 10;
+
+    // ====== Helper show/hide ======
+    const qs = (s, p=document) => p.querySelector(s);
+
+    // Tampilkan input detail jika "Ya" dipilih
+    document.addEventListener('change', (e)=>{
+      if(e.target.name === 'riwayat_sakit'){
+        qs('#sakit_detail').style.display = e.target.value === 'Ya' ? 'block' : 'none';
+        if(e.target.value !== 'Ya') qs('#sakit_detail').value = '';
+      }
+      if(e.target.name === 'kuliah'){
+        qs('#kuliah_info').style.display = e.target.value === 'Ya' ? 'block' : 'none';
+        if(e.target.value !== 'Ya') qs('#kuliah_info').value = '';
+      }
+    });
+
+    // ====== Client-side validation for files ======
+    function validateFiles() {
+      const errors = [];
+      const fileInputs = ['cv','skck','ijazah','ktp_file','foto_full','portfolio'].map(id => qs('#'+id));
+      for(const input of fileInputs){
+        if(!input) continue;
+        const files = input.files || [];
+        if(input.id === 'portfolio' && files.length > MAX_PORTFOLIO_FILES){
+          errors.push(`Portfolio maksimal ${MAX_PORTFOLIO_FILES} file.`);
+        }
+        for(const f of files){
+          if(f.size > MAX_FILE_BYTES){
+            errors.push(`File "${f.name}" melebihi ${Math.round(MAX_FILE_BYTES/1024/1024)} MB.`);
+          }
+        }
+      }
+      return errors;
+    }
+
+    // ====== Submit handler ======
+    qs('#lokerForm').addEventListener('submit', async (ev)=>{
+      ev.preventDefault();
+      const errorBox = qs('#errors');
+      const okBox = qs('#success');
+      errorBox.textContent = ""; okBox.style.display = "none";
+
+      // HTML5 validation
+      if(!ev.target.checkValidity()){
+        errorBox.textContent = "Mohon lengkapi semua kolom wajib dengan format yang benar.";
+        ev.target.reportValidity();
+        return;
+      }
+      // custom file checks
+      const fileErrs = validateFiles();
+      if(fileErrs.length){
+        errorBox.textContent = fileErrs.join(" ");
+        return;
+      }
+
+      // Build FormData
+      const fd = new FormData(ev.target);
+
+      try{
+        if(POST_URL){
+          const res = await fetch(POST_URL, { method:'POST', body: fd });
+          if(!res.ok) throw new Error('Gagal mengirim data');
+        } else {
+          // tanpa backend: hanya simulasi sukses
+          await new Promise(r=>setTimeout(r, 400));
+        }
+        okBox.style.display = "block";
+        ev.target.reset();
+        // hide conditional fields again
+        qs('#sakit_detail').style.display = 'none';
+        qs('#kuliah_info').style.display = 'none';
+        // scroll to success
+        okBox.scrollIntoView({behavior:'smooth', block:'center'});
+      }catch(err){
+        errorBox.textContent = "Terjadi kesalahan saat mengirim. Coba lagi nanti.";
+      }
+    });
+
+    // ====== Toggle input untuk "Lainnya" ======
+    const cbLainnya  = document.getElementById('sumber_lainnya_cb');
+    const txtLainnya = document.getElementById('sumber_lainnya_text');
+
+    cbLainnya?.addEventListener('change', ()=>{
+    const on = cbLainnya.checked;
+    txtLainnya.style.display = on ? 'inline-block' : 'none';
+    txtLainnya.disabled = !on;
+    if(!on) txtLainnya.value = '';
+    });
+
+    // ====== Pastikan minimal satu sumber dipilih (termasuk Lainnya) ======
+    function validateSumber() {
+    const anyChecked = Array.from(document.querySelectorAll('input[name="sumber[]"]'))
+        .some(i => i.checked);
+    const lainnyaOn  = cbLainnya && cbLainnya.checked;
+    if (!anyChecked && !lainnyaOn) {
+        return 'Pilih minimal satu sumber informasi lowongan.';
+    }
+    if (lainnyaOn && !txtLainnya.value.trim()) {
+        return 'Isi keterangan pada "Lainnya".';
+    }
+    return '';
+    }
+
+    // Pada submit: tambahkan cek ini & kirim nilai 'Lainnya' jika ada
+    const form = document.getElementById('lokerForm');
+    form.addEventListener('submit', (ev)=>{
+    const errorBox = document.getElementById('errors');
+
+    // validasi sumber
+    const sumberErr = validateSumber();
+    if (sumberErr) {
+        ev.preventDefault();
+        errorBox.textContent = sumberErr;
+        return;
+    }
+
+    // sisipkan field hidden untuk "sumber_lainnya" saat submit
+    const existing = form.querySelector('input[name="sumber_lainnya"]');
+    if (cbLainnya && cbLainnya.checked) {
+        if (!existing) {
+        const hidden = document.createElement('input');
+        hidden.type  = 'hidden';
+        hidden.name  = 'sumber_lainnya';
+        hidden.value = txtLainnya.value.trim();
+        form.appendChild(hidden);
+        } else {
+        existing.value = txtLainnya.value.trim();
+        }
+    } else if (existing) {
+        existing.remove();
+    }
+    }, {capture:true}); // capture agar jalan sebelum handler fetch utama
+  </script>
+</body>
+</html>
