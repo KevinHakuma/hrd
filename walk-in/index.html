@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Form Walk-In Interview — HRD Dev IRT</title>
+  <meta name="theme-color" content="#1f3b2f" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --deep:#1f3b2f; --sage:#587a68; --beige:#efe9e2; --card:#fffaf3;
+      --ink:#2a2a2a; --muted:#6d6b66; --ring:rgba(40,80,64,.22);
+      --shadow:0 18px 40px rgba(24,36,30,.18);
+      --radius:16px; --radius-lg:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1000px 700px at 10% 10%, rgba(31,59,47,.18), transparent 60%),
+        radial-gradient(900px 600px at 90% 120%, rgba(88,122,104,.18), transparent 60%),
+        var(--beige);
+      display:grid; place-items:start center; padding:24px;
+    }
+    .back-container{width:100%; max-width:960px; margin:0 auto 12px}
+    .back-btn{
+      display:inline-block; padding:8px 14px; background:var(--deep); color:#fff;
+      text-decoration:none; border-radius:8px; font-size:14px;
+      transition:background .2s ease, transform .15s ease;
+    }
+    .back-btn:hover{ background:#2c5644; transform:translateY(-2px) }
+
+    .wrap{
+      width:min(960px,100%);
+      background:linear-gradient(180deg, rgba(31,59,47,.04), rgba(255,255,255,.55)), var(--card);
+      border:1px solid rgba(31,59,47,.10); border-radius:28px; box-shadow:var(--shadow);
+      padding:clamp(18px,3vw,28px);
+    }
+    header{
+      display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center;
+      min-block-size:clamp(92px,10vw,120px); padding-bottom:6px;
+    }
+    .logo {
+      width:64px; 
+      height:64px; 
+      border-radius:16px;
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .logo img {
+      width:100%;
+      height:100%;
+      object-fit: contain; /* biar logonya proporsional */
+    }
+    h1{margin:0; font-size:clamp(1.05rem,.8rem + .8vw,1.5rem)}
+    .sub{color:var(--muted); font-size:clamp(.85rem,.8rem + .2vw,.95rem); margin-top:4px}
+
+    form{margin-top:12px}
+    fieldset{
+      border:1px solid rgba(31,59,47,.12); border-radius:var(--radius-lg);
+      background:#fffdf8cc; padding:clamp(14px,2.2vw,20px); margin:16px 0;
+    }
+    legend{padding:0 8px; color:var(--sage); text-transform:uppercase; font-size:.8rem; letter-spacing:.2px}
+    .grid{display:grid; gap:14px}
+    @media (min-width:720px){ .cols-2{ grid-template-columns:1fr 1fr } }
+
+    label{display:block; font-weight:600; margin-bottom:6px}
+    .req::after{content:" *"; color:#c2463a}
+    input[type="text"],input[type="email"],input[type="date"], input[type="number"], input[type="tel"],select,textarea{
+      width:100%; border:1px solid rgba(31,59,47,.18); border-radius:12px;
+      padding:12px; background:#fff; color:var(--ink); font:inherit;
+      transition:box-shadow .12s ease, border-color .12s ease;
+    }
+    textarea{min-height:110px; resize:vertical}
+    input:focus,select:focus,textarea:focus{outline:none; box-shadow:0 0 0 4px var(--ring); border-color:rgba(31,59,47,.25)}
+    .hint{color:var(--muted); font-size:.85rem; margin-top:6px}
+
+    .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px; border:1px solid rgba(31,59,47,.15); background:#fff}
+
+    .chip-inline{gap:8px}
+    .chip-inline input[type="text"]{border:1px solid rgba(31,59,47,.18); border-radius:999px; padding:8px 10px; min-width:140px; font:inherit}
+    .chip-inline input[type="text"]:focus{outline:none; box-shadow:0 0 0 4px var(--ring); border-color:rgba(31,59,47,.25)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 18px; border-radius:999px; border:1px solid rgba(31,59,47,.18);
+      background:#e9efe8; color:#1f3b2f; font-weight:700; text-decoration:none;
+      transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 10px 18px rgba(31,59,47,.12); background:#f3f7f1 }
+    .actions{display:flex; gap:12px; flex-wrap:wrap}
+    .success{display:none; margin-top:16px; border:1px solid rgba(31,59,47,.12); background:#f2fbf4; color:#1c5a2e; padding:14px 16px; border-radius:14px}
+    .error{ color:#b42318; font-size:.9rem; margin-top:8px }
+  </style>
+</head>
+<body>
+  <div class="back-container"><a href="../index.html" class="back-btn">← Kembali</a></div>
+
+  <main class="wrap">
+    <header>
+      <!-- ganti path logo jika perlu -->
+      <div class="logo"><img src="../assets/img/logo.png" alt="IRT Logo"></div>
+      <div>
+        <h1>Form Walk-In Interview</h1>
+        <div class="sub">Isi data dengan lengkap & benar. Tanda (*) wajib diisi.</div>
+      </div>
+    </header>
+
+    <form id="walkinForm" novalidate>
+      <fieldset>
+        <legend>Data Walk-In</legend>
+        <div class="grid cols-2">
+          <!-- EMAIL* -->
+          <div>
+            <label class="req" for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="nama@email.com">
+          </div>
+
+          <!-- NAMA LENGKAP* -->
+          <div>
+            <label class="req" for="nama">Nama Lengkap (sesuai KTP)</label>
+            <input id="nama" name="nama" type="text" required>
+          </div>
+
+          <!-- ALAMAT KTP* -->
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req" for="alamat_ktp">Alamat lengkap (sesuai KTP)</label>
+            <textarea id="alamat_ktp" name="alamat_ktp" required></textarea>
+          </div>
+
+          <!-- ALAMAT DOMISILI -->
+          <div class="cols-2" style="grid-column:1/-1">
+            <label for="alamat_domisili">Alamat lengkap (Domisili)</label>
+            <textarea id="alamat_domisili" name="alamat_domisili"></textarea>
+          </div>
+
+          <!-- TANGGAL LAHIR* -->
+          <div>
+            <label class="req" for="tgl_lahir">Tanggal lahir (sesuai KTP)</label>
+            <input id="tgl_lahir" name="tgl_lahir" type="date" required>
+          </div>
+
+          <!-- POSISI* -->
+          <div>
+            <label class="req" for="posisi">Posisi yang ingin dilamar</label>
+            <select id="posisi" name="posisi" required>
+              <option value="">— pilih posisi —</option>
+              <!-- Ganti/isi sesuai kebutuhan -->
+              <option>Frontliner (Kasir)</option>
+              <option>Salon Trainee</option>
+              <option>Salon Trainee (Magang)</option>
+              <option>Staff Admin</option>
+              <option>Laundry Boy</option>
+              <option>Konten Kreator</option>
+              <option>Hairstylist</option>
+              <option>Assistant Stylist</option>
+              <option>Shampo / Therapist</option>
+              <option>Manicurist</option>
+              <option>Design Grafis</option>
+              <option>IT Support</option>
+              <option>Customer Service</option>
+              <option>Staff Finance - Accounting</option>
+              <option>Staff TAX</option>
+              <option>Staff Logistik</option>
+              <option>Driver</option>
+              <option>Host Live</option>
+              <option>Beauty Advisor</option>
+              <option>Lulusan SMKN 3 Tangerang</option>
+              <option>Lulusan SMKN 7 Tangerang Selatan</option>
+            </select>
+          </div>
+
+          <!-- JENIS KELAMIN* -->
+          <div>
+            <label class="req">Jenis Kelamin</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="jk" value="Pria" required> Pria</label>
+              <label class="chip"><input type="radio" name="jk" value="Wanita"> Wanita</label>
+            </div>
+          </div>
+
+          <!-- NO. WA* -->
+          <div>
+            <label class="req" for="wa">No. WhatsApp (WA)</label>
+            <input id="wa" name="wa" type="number" inputmode="tel" required placeholder="+62… / 08…"
+                   pattern="^(\+62|0)[0-9]{8,13}$">
+            <div class="hint">Contoh: <b>081234567890</b> atau <b>+6281234567890</b>.</div>
+          </div>
+
+          <!-- PENDIDIKAN TERAKHIR* -->
+          <div>
+            <label class="req" for="pendidikan">Pendidikan terakhir</label>
+            <input id="pendidikan" name="pendidikan" type="text" required placeholder="SMA/SMK/D3/S1/…">
+          </div>
+
+          <!-- TINGGI & BERAT BADAN* -->
+          <div>
+            <label class="req" for="tb">Tinggi & Berat Badan</label>
+            <input id="tb" name="tinggi_berat" type="text" inputmode="numeric" required placeholder="170/50"
+                   pattern="^[0-9]{2,3}\\/[0-9]{2,3}$">
+            <div class="hint">Format <b>tinggi/berat</b> (cm/kg), contoh <b>170/50</b>.</div>
+          </div>
+
+          <!-- KULIAH?* -->
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req">Apakah Anda sedang dalam jenjang kuliah?</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="kuliah" value="Ya" required> Ya</label>
+              <label class="chip"><input type="radio" name="kuliah" value="Tidak"> Tidak</label>
+            </div>
+          </div>
+
+          <!-- SUMBER INFO* + LAINNYA -->
+          <div class="cols-2" style="grid-column:1/-1">
+            <label class="req">Darimanakah Anda mendapat informasi lowongan pekerjaan?</label>
+            <div class="row">
+              <label class="chip"><input type="checkbox" name="sumber[]" value="Instagram"> Instagram</label>
+              <label class="chip"><input type="checkbox" name="sumber[]" value="TikTok"> TikTok</label>
+              <label class="chip"><input type="checkbox" name="sumber[]" value="LinkedIn"> LinkedIn</label>
+              <label class="chip"><input type="checkbox" name="sumber[]" value="Teman"> Teman</label>
+              <label class="chip"><input type="checkbox" name="sumber[]" value="Walk-in"> Walk-in</label>
+              <label class="chip"><input type="checkbox" name="sumber[]" value="Website"> Website</label>
+              <label class="chip chip-inline">
+                <input id="sumber_lain_cb" type="checkbox" value="Lainnya"><span>Lainnya</span>
+                <input id="sumber_lain_txt" type="text" placeholder="sebutkan…" style="display:none" disabled>
+              </label>
+            </div>
+          </div>
+
+          <!-- JABODETABEK?* -->
+          <div>
+            <label class="req">Bersedia ditempatkan di Jabodetabek?</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="penempatan" value="Ya" required> Ya</label>
+              <label class="chip"><input type="radio" name="penempatan" value="Tidak"> Tidak</label>
+            </div>
+          </div>
+
+          <!-- HADIR INTERVIEW?* -->
+          <div>
+            <label class="req">Bersedia hadir interview di lokasi yang sudah ditentukan?</label>
+            <div class="row">
+              <label class="chip"><input type="radio" name="hadir" value="Bersedia" required> Bersedia</label>
+              <label class="chip"><input type="radio" name="hadir" value="Tidak Bersedia"> Tidak Bersedia</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button class="btn" type="submit">Kirim</button>
+        <span class="hint">Dengan menekan Kirim, Anda menyetujui data digunakan untuk proses rekrutmen.</span>
+      </div>
+
+      <div id="success" class="success">
+        <strong>Terima kasih.</strong> Anda akan dihubungi apabila sesuai dengan kriteria dalam waktu 1–30 hari ke depan.
+      </div>
+      <div id="errors" class="error" role="alert" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <script>
+    const POST_URL = ""; // isi jika sudah ada endpoint backend (Apps Script/API).
+    const form = document.getElementById('walkinForm');
+    const errorBox = document.getElementById('errors');
+    const okBox = document.getElementById('success');
+
+    // Toggle "Lainnya"
+    const cb = document.getElementById('sumber_lain_cb');
+    const tx = document.getElementById('sumber_lain_txt');
+    cb?.addEventListener('change', ()=>{
+      const on = cb.checked;
+      tx.style.display = on ? 'inline-block' : 'none';
+      tx.disabled = !on; if(!on) tx.value = '';
+    });
+
+    // Validasi minimal satu sumber (termasuk 'Lainnya' jika dicentang harus diisi)
+    function validateSumber(){
+      const any = Array.from(document.querySelectorAll('input[name="sumber[]"]')).some(i=>i.checked);
+      const otherOn = cb && cb.checked;
+      if(!any && !otherOn) return 'Pilih minimal satu sumber informasi lowongan.';
+      if(otherOn && !tx.value.trim()) return 'Isi keterangan pada "Lainnya".';
+      return '';
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault(); errorBox.textContent=""; okBox.style.display="none";
+
+      if(!form.checkValidity()){
+        errorBox.textContent = "Mohon lengkapi semua kolom wajib dengan format yang benar.";
+        form.reportValidity(); return;
+      }
+      const sErr = validateSumber();
+      if(sErr){ errorBox.textContent = sErr; return; }
+
+      const fd = new FormData(form);
+      if(cb && cb.checked && tx.value.trim()){
+        fd.append('sumber_lainnya', tx.value.trim());
+      }
+
+      try{
+        if(POST_URL){
+          const res = await fetch(POST_URL, {method:'POST', body:fd});
+          if(!res.ok) throw new Error('Gagal mengirim');
+        }else{
+          await new Promise(r=>setTimeout(r,400)); // simulasi sukses
+        }
+        okBox.style.display="block";
+        form.reset();
+        tx.style.display='none'; tx.disabled=true;
+        okBox.scrollIntoView({behavior:'smooth', block:'center'});
+      }catch(err){
+        errorBox.textContent="Terjadi kesalahan saat mengirim. Coba lagi nanti.";
+      }
+    });
+  </script>
+</body>
+</html>

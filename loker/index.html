@@ -38,12 +38,22 @@
       display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center;
       min-block-size: clamp(92px, 10vw, 120px); padding-bottom:6px;
     }
-    .logo{
-      width:64px; height:64px; border-radius:16px; display:grid; place-items:center;
-      background: radial-gradient(60% 60% at 50% 35%, #2a4a3b 0%, #1b3228 100%);
-      color:#ffb463; font-family:"Cormorant Garamond", serif; font-weight:600; font-size:28px;
-      border:1px solid rgba(255,255,255,.25); box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);
+    .logo {
+      width:64px; 
+      height:64px; 
+      border-radius:16px;
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+      overflow:hidden;
     }
+
+    .logo img {
+      width:100%;
+      height:100%;
+      object-fit: contain; /* biar logonya proporsional */
+    }
+
     h1{margin:0; font-size:clamp(1.05rem, .8rem + .8vw, 1.5rem)}
     .sub{color:var(--muted); font-size:clamp(.85rem, .8rem + .2vw, .95rem); margin-top:4px}
 
@@ -143,7 +153,9 @@
 
   <main class="wrap">
     <header>
-      <div class="logo" aria-hidden="true">HR</div>
+      <div class="logo">
+        <img src="../assets/img/logo.png" alt="IRT Logo">
+      </div>
       <div>
         <h1>Form Loker 2025</h1>
         <div class="sub">Isi data dengan lengkap & benar. Tanda (*) wajib diisi.</div>
@@ -165,10 +177,27 @@
             <select id="posisi" name="posisi" required>
               <option value="">— pilih posisi —</option>
               <!-- Ganti/isi sesuai kebutuhan -->
-              <option>Stylist</option>
-              <option>Therapist</option>
-              <option>Receptionist</option>
-              <option>Kasir</option>
+              <option>Frontliner (Kasir)</option>
+              <option>Salon Trainee</option>
+              <option>Salon Trainee (Magang)</option>
+              <option>Staff Admin</option>
+              <option>Laundry Boy</option>
+              <option>Konten Kreator</option>
+              <option>Hairstylist</option>
+              <option>Assistant Stylist</option>
+              <option>Shampo / Therapist</option>
+              <option>Manicurist</option>
+              <option>Design Grafis</option>
+              <option>IT Support</option>
+              <option>Customer Service</option>
+              <option>Staff Finance - Accounting</option>
+              <option>Staff TAX</option>
+              <option>Staff Logistik</option>
+              <option>Driver</option>
+              <option>Host Live</option>
+              <option>Beauty Advisor</option>
+              <option>Lulusan SMKN 3 Tangerang</option>
+              <option>Lulusan SMKN 7 Tangerang Selatan</option>
             </select>
           </div>
 

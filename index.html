@@ -56,17 +56,20 @@
       min-block-size: clamp(92px, 12vw, 120px);
     }
 
-    .logo{
-      width:64px; height:64px; border-radius:16px;
-      display:grid; place-items:center;
-      background:
-        radial-gradient(60% 60% at 50% 35%, #2a4a3b 0%, #1b3228 100%);
-      color:#ffb463;
-      font-family:"Cormorant Garamond", serif; font-weight:600; font-size:28px;
-      letter-spacing:.4px;
-      border:1px solid rgba(255,255,255,.25);
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
-      flex:0 0 auto;
+    .logo {
+      width:64px; 
+      height:64px; 
+      border-radius:16px;
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .logo img {
+      width:100%;
+      height:100%;
+      object-fit: contain; /* biar logonya proporsional */
     }
     .title{ font-weight:700; letter-spacing:.2px; font-size:clamp(1rem, 0.8rem + 0.5vw, 1.25rem); line-height:1.2 }
     .subtitle{ color:var(--muted); font-size:clamp(0.8rem, 0.7rem + 0.3vw, 0.9rem); margin-top:6px; line-height:1.3 }
@@ -154,7 +157,9 @@
 <body>
   <main class="wrap" role="main" aria-label="HRD Link in Bio">
     <header class="head">
-      <div class="logo">HR</div>
+      <div class="logo">
+        <img src="assets/img/logo.png" alt="IRT Logo">
+      </div>
       <div>
         <div class="title">HRD — Dev IRT</div>
         <div class="subtitle">Semua form HRD dalam satu halaman</div>
@@ -184,7 +189,7 @@
             <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a class="item" href="https://example.com/form-walk-in-interview" target="_blank" rel="noopener">
+        <a class="item" href="walk-in/index.html">
           <div class="badge">📝</div>
           <div class="text">
             <b>FORM WALK IN INTERVIEW</b>
